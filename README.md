@@ -4,11 +4,11 @@
 
 ## Description
 
-Pipex est un projet qui consiste à reproduire le comportement du mécanisme de pipe UNIX en C. Le programme prend deux commandes shell et les connecte via un pipe, en redirigeant l'entrée depuis un fichier et la sortie vers un autre fichier.
+Pipex is a project that consists of reproducing the behavior of the UNIX pipe mechanism in C. The program takes two shell commands and connects them through a pipe, redirecting input from a file and output to another file.
 
-L'objectif est de comprendre en profondeur le fonctionnement des processus (`fork`), des redirections de file descriptors (`dup2`), de l'exécution de programmes (`execve`) et de la communication inter-processus via `pipe`.
+The goal is to gain a deep understanding of how processes work (`fork`), file descriptor redirection (`dup2`), program execution (`execve`), and inter-process communication via `pipe`.
 
-Le programme reproduit le comportement de :
+The program reproduces the behavior of:
 
 ```bash
 < file1 cmd1 | cmd2 > file2
@@ -19,52 +19,52 @@ Le programme reproduit le comportement de :
 ### Compilation
 
 ```bash
-make        # Compile la libft puis le binaire pipex
-make clean  # Supprime les fichiers objets (.o)
-make fclean # Supprime les fichiers objets et le binaire
-make re     # Recompile entièrement le projet
+make        # Compiles libft then the pipex binary
+make clean  # Removes object files (.o)
+make fclean # Removes object files and the binary
+make re     # Fully recompiles the project
 ```
 
-Le projet compile avec `cc` et les flags `-Wall -Wextra -Werror`.
+The project compiles with `cc` and the flags `-Wall -Wextra -Werror`.
 
-### Exécution
+### Usage
 
 ```bash
 ./pipex file1 "cmd1" "cmd2" file2
 ```
 
-Le programme prend 4 arguments :
-- `file1` : fichier d'entrée (redirigé sur stdin de cmd1)
-- `cmd1` : première commande shell avec ses paramètres
-- `cmd2` : deuxième commande shell avec ses paramètres
-- `file2` : fichier de sortie (reçoit stdout de cmd2)
+The program takes 4 arguments:
+- `file1` : input file (redirected to stdin of cmd1)
+- `cmd1` : first shell command with its parameters
+- `cmd2` : second shell command with its parameters
+- `file2` : output file (receives stdout of cmd2)
 
-### Exemples
+### Examples
 
 ```bash
 ./pipex infile "ls -l" "wc -l" outfile
-# Équivalent à : < infile ls -l | wc -l > outfile
+# Equivalent to: < infile ls -l | wc -l > outfile
 
 ./pipex infile "grep a1" "wc -w" outfile
-# Équivalent à : < infile grep a1 | wc -w > outfile
+# Equivalent to: < infile grep a1 | wc -w > outfile
 ```
 
 ## Resources
 
-### Références classiques
+### Classic references
 
-- `man 2 pipe` — création de pipes
-- `man 2 fork` — création de processus enfants
-- `man 2 dup2` — duplication de file descriptors
-- `man 2 execve` — exécution de programmes
-- `man 2 wait` / `man 2 waitpid` — attente de fin de processus
-- `man 2 access` — vérification des permissions d'un fichier
-- [Pipes in C (tutoriel)](https://www.codequoi.com/en/pipe-an-inter-process-communication-method/)
+- `man 2 pipe` — pipe creation
+- `man 2 fork` — child process creation
+- `man 2 dup2` — file descriptor duplication
+- `man 2 execve` — program execution
+- `man 2 wait` / `man 2 waitpid` — waiting for process termination
+- `man 2 access` — file permission checking
+- [Pipes in C (tutorial)](https://www.codequoi.com/en/pipe-an-inter-process-communication-method/)
 - [Communicating between processes (using pipes) in C](https://youtu.be/Mqb2dVRe0uo?si=A28mciZjL201lclp)
 
-### Utilisation de l'IA
+### AI usage
 
-L'IA (Claude) a été utilisée pour :
-- La rédaction de ce fichier README.md.
-- La validation de la logique de l'implémentation.
-- Suivi de l'avancement du projet et des étapes de développement.
+AI (Claude) was used for:
+- Writing this README.md file.
+- Validating the implementation logic.
+- Tracking project progress and development steps.

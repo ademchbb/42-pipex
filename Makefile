@@ -6,7 +6,7 @@
 #    By: adchebbi <adchebbi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/25 12:26:18 by adchebbi          #+#    #+#              #
-#    Updated: 2026/03/26 11:25:43 by adchebbi         ###   ########.fr        #
+#    Updated: 2026/03/28 17:26:04 by adchebbi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,8 @@ RESET       = \033[0m
 
 # ************* FILES CREATED ************* #
 #											#
-FILES = infile \
-		infile_*\
-		outfile \
-		outfile_*\
+FILES = infile* \
+		outfile*
 #											#
 # ***************************************** #
 

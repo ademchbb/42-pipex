@@ -6,7 +6,7 @@
 /*   By: adchebbi <adchebbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:45:49 by adchebbi          #+#    #+#             */
-/*   Updated: 2026/03/23 11:53:30 by adchebbi         ###   ########.fr       */
+/*   Updated: 2026/04/15 12:36:36 by adchebbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,16 @@ static void	init_pipex(t_pipex *p, char **argv, char **envp)
 		error_exit("pipe");
 }
 
-static void	wait_children(void)
+static int	wait_children(pid_t pid1, pid_t pid2)
 {
 	int	status;
 
-	waitpid(-1, &status, 0);
-	waitpid(-1, &status, 0);
+	status = 0;
+	waitpid(pid1, &status, 0);
+	waitpid(pid2, &status, 0);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (1);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -40,22 +44,21 @@ int	main(int argc, char **argv, char **envp)
 	pid_t	pid2;
 
 	if (argc != 5)
-		error_exit("Usage: ./pipex file1 cmd1 cmd2 file2\n");
+		msg_exit("Usage: ./pipex file1 cmd1 cmd2 file2", 1);
 	init_pipex(&p, argv, envp);
 	pid1 = fork();
 	if (pid1 < 0)
-		error_exit("fork\n");
+		error_exit("fork");
 	if (pid1 == 0)
 		child_one(&p, argv[2]);
 	pid2 = fork();
 	if (pid2 < 0)
-		error_exit("fork\n");
+		error_exit("fork");
 	if (pid2 == 0)
 		child_two(&p, argv[3]);
 	close(p.pipe_fd[0]);
 	close(p.pipe_fd[1]);
 	close(p.file_in);
 	close(p.file_out);
-	wait_children();
-	return (EXIT_SUCCESS);
+	return (wait_children(pid1, pid2));
 }

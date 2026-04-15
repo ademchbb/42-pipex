@@ -6,7 +6,7 @@
 /*   By: adchebbi <adchebbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 10:12:57 by adchebbi          #+#    #+#             */
-/*   Updated: 2026/03/23 11:22:13 by adchebbi         ###   ########.fr       */
+/*   Updated: 2026/03/28 17:21:34 by adchebbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ void	error_exit(char *msg)
 {
 	perror(msg);
 	exit(EXIT_FAILURE);
+}
+
+void	msg_exit(char *msg, int code)
+{
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+	exit(code);
 }
 
 char	**get_cmd_args(char *cmd)

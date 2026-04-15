@@ -6,7 +6,7 @@
 /*   By: adchebbi <adchebbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 10:19:00 by adchebbi          #+#    #+#             */
-/*   Updated: 2026/03/25 18:11:40 by adchebbi         ###   ########.fr       */
+/*   Updated: 2026/03/28 17:23:43 by adchebbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	exec_cmd(t_pipex *p, char *cmd)
 	if (!args || !args[0])
 	{
 		free_tab(args);
-		error_exit("command not found");
+		msg_exit("command not found", 127);
 	}
 	path = get_cmd_path(args[0], p->envp);
 	if (!path)
 	{
 		free_tab(args);
-		error_exit("command not found");
+		msg_exit("command not found", 127);
 	}
 	execve(path, args, p->envp);
 	free(path);
